@@ -9,10 +9,14 @@ namespace WordMetrics.Logic.Classes
     internal class WordDistributionResult
     {
         public WordDistributionResult() { }
-
         public string Word { get; set; } = string.Empty;
+        public IEnumerable<WordPageResult>? Pages { get {  return _pages; } }
 
-        public IEnumerable<WordPageResult>? Pages { get; set; } = null;
+        private IEnumerable<SingleFindResult>? _allFindings = null;
+
+        private IEnumerable<WordPageResult>? _pages = null;
+        public void AddAllFindings(IEnumerable<SingleFindResult> allFindings) { _allFindings = allFindings; }
+        public void AddPages(IEnumerable<WordPageResult> allPages) { _pages = allPages; }   
 
     }
 }
