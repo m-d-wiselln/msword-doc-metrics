@@ -14,6 +14,5 @@ namespace WordMetrics.Logic.Classes
 
         public IEnumerable<string> Findings { get; set; } = new List<string>();
 
-
     }
 }

@@ -27,8 +27,6 @@ namespace WordMetrics
             IEnumerable<WordDistributionResult>? wordDistributions = WordMetricsService.WordDistributions(this.FilePath.Text, this.WordList.Lines);
             if (wordDistributions != null && wordDistributions.Any()) {
                 
-
-
             }
         }
     }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WordMetrics.Logic.Classes
+﻿namespace WordMetrics.Logic.Classes
 {
     internal class SingleFindResult
     {
