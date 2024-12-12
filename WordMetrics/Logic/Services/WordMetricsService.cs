@@ -37,33 +37,32 @@ namespace WordMetrics.Logic.Services
                 try
                 {
                     document = wordApplication.Documents.Open(filePath, ReadOnly: true);
-                    foreach(string singleWord in words)
+
+                    var lastPage = document.Range().GoTo(WdGoToItem.wdGoToPage, WdGoToDirection.wdGoToLast);
+                    var numberOfPages = (int)lastPage.Information[WdInformation.wdActiveEndPageNumber];
+
+                  
+                    foreach (string singleWord in words)
                     {
                         int currentPageNumber = 0;
                         WordDistributionResult thisWordResult = new WordDistributionResult() { Word = singleWord };
                         IList<WordPageResult> wordPages = new List<WordPageResult>();
                         IList<SingleFindResult> allFindings = new List<SingleFindResult>();
 
-                        foreach (Paragraph paragraph in document.Paragraphs) {
+                        for (int i = 1; i <= numberOfPages; i++)
+                        {
+                            wordPages.Add(new WordPageResult() { PageNumber = i });
+                        }
 
-                            currentPageNumber = (int)paragraph.Range.Information[WdInformation.wdActiveEndPageNumber];
+                        Microsoft.Office.Interop.Word.Range range = document.Content;
 
-                            WordPageResult? wordPage = (from allPages in wordPages where allPages.PageNumber == currentPageNumber select allPages).FirstOrDefault();
-                            if (wordPage == null)
-                            {
-                                wordPages.Add(new WordPageResult() {  PageNumber = currentPageNumber });
-                            }
+                        range.Find.Execute(singleWord);
 
-                            Microsoft.Office.Interop.Word.Range range = paragraph.Range;
-
+                        while (range.Find.Found)
+                        {
+                            currentPageNumber = (int)range.Information[WdInformation.wdActiveEndPageNumber];
+                            allFindings.Add(new SingleFindResult() { PageNumber = currentPageNumber, FindResult = range.Text });
                             range.Find.Execute(singleWord);
-
-                            while (range.Find.Found)
-                            {
-                                allFindings.Add(new SingleFindResult() {  PageNumber = currentPageNumber, FindResult = range.Text });
-                                range.Find.Execute(singleWord);
-                            }
-                            
                         }
 
                         thisWordResult.AddPages(wordPages);
