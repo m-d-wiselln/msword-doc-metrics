@@ -35,6 +35,7 @@
             label2 = new Label();
             AnalyzeDocument = new Button();
             AnalyzeProgress = new ProgressBar();
+            WordResults = new TreeView();
             SuspendLayout();
             // 
             // FilePath
@@ -99,11 +100,20 @@
             AnalyzeProgress.Size = new Size(264, 27);
             AnalyzeProgress.TabIndex = 7;
             // 
+            // WordResults
+            // 
+            WordResults.Location = new Point(8, 207);
+            WordResults.Name = "WordResults";
+            WordResults.Size = new Size(780, 293);
+            WordResults.TabIndex = 8;
+            WordResults.Visible = false;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 512);
+            Controls.Add(WordResults);
             Controls.Add(AnalyzeProgress);
             Controls.Add(AnalyzeDocument);
             Controls.Add(label2);
@@ -126,5 +136,6 @@
         private Label label2;
         private Button AnalyzeDocument;
         private ProgressBar AnalyzeProgress;
+        private TreeView WordResults;
     }
 }

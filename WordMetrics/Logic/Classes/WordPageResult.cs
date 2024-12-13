@@ -12,7 +12,15 @@ namespace WordMetrics.Logic.Classes
 
         public int PageNumber { get; set; } = 1;
 
-        public IEnumerable<string> Findings { get; set; } = new List<string>();
+        private IList<string> _findings = new List<string>();
+
+        public IEnumerable<string> Findings { get { return _findings; } }
+        public void AddFinding(string text)
+        {
+            _findings.Add(text);
+        }
+
+
 
     }
 }

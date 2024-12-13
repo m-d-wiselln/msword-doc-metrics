@@ -41,7 +41,7 @@ namespace WordMetrics.Logic.Services
                     var lastPage = document.Range().GoTo(WdGoToItem.wdGoToPage, WdGoToDirection.wdGoToLast);
                     var numberOfPages = (int)lastPage.Information[WdInformation.wdActiveEndPageNumber];
 
-                  
+
                     foreach (string singleWord in words)
                     {
                         int currentPageNumber = 0;
@@ -81,8 +81,21 @@ namespace WordMetrics.Logic.Services
                 }
             }
             finally
-            { 
+            {
                 wordApplication?.Quit(SaveChanges: false);
+            }
+
+            return Process(result);
+        }
+
+        private static IEnumerable<WordDistributionResult>? Process(IEnumerable<WordDistributionResult>? source)
+        {
+            if(source == null || !source.Any()) {  return source; }
+
+            IEnumerable<WordDistributionResult>? result = source;
+
+            foreach (WordDistributionResult resultItem in result) {
+                resultItem.ProcessFindings();
             }
 
             return result;
