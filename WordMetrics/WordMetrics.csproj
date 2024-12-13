@@ -20,4 +20,8 @@
     </COMReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="C1.Win.FlexChart" Version="8.0.20242.688" />
+  </ItemGroup>
+
 </Project>

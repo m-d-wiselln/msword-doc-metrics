@@ -43,7 +43,7 @@ namespace WordMetrics
                         {
                             string pageNodeText = $"Page {page.PageNumber}";
 
-                            if(page.Findings != null && page.Findings.Any())  { pageNodeText += string.Format("(Count: {0:#,##0})", page.Findings.Count()); }
+                            if(page.Findings != null && page.Findings.Any())  { pageNodeText += string.Format(" (Count: {0:#,##0})", page.Findings.Count()); }
 
                             TreeNode pageNode = new TreeNode() { Text = pageNodeText };
                             wordNode.Nodes.Add(pageNode);
